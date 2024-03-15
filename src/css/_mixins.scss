@@ -1,0 +1,69 @@
+@import 'variables';
+
+@mixin font-face($font-family, $url, $weight) {
+  @font-face {
+    font-family: '#{$font-family}';
+    src: url('#{$url}.woff2') format('woff2'),
+      url('#{$url}.woff') format('woff');
+    font-weight: #{$weight};
+    font-style: normal;
+    font-display: swap;
+  }
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  width: 1px;
+  height: 1px;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+@mixin arrow-states($parent) {
+  .#{$parent}:focus-visible .arrow__circle {
+    fill: $color-accent-light;
+  }
+
+  .#{$parent}:focus-visible .arrow__path {
+    stroke: $color-main-lightest;
+  }
+
+  .#{$parent}:hover:not(:focus-visible) .arrow__circle {
+    fill: $color-accent;
+  }
+
+  .#{$parent}:hover:not(:focus-visible) .arrow__path {
+    stroke: $color-main-lightest;
+  }
+
+  .#{$parent}:active:not(:focus-visible) .arrow__circle {
+    fill: $color-accent-dark;
+    stroke: $color-accent-dark;
+  }
+
+  .#{$parent}:active:not(:focus-visible) .arrow__path {
+    stroke: $color-main-lightest;
+  }
+}
+
+@mixin image-set($pathToImage, $format) {
+  background: {
+    image: url('#{$pathToImage}.#{format}');
+    image: image-set(
+      url('#{$pathToImage}@3x.avif') type("image/avif") 3x,
+      url('#{$pathToImage}@2x.avif') type("image/avif") 2x,
+      url('#{$pathToImage}.avif') type("image/avif") 1x,
+      url('#{$pathToImage}@3x.webp') type("image/webp") 3x,
+      url('#{$pathToImage}@2x.webp') type("image/webp") 2x,
+      url('#{$pathToImage}.webp') type("image/webp") 1x,
+      url('#{$pathToImage}@3x.#{format}') 3x,
+      url('#{$pathToImage}@2x.#{format}') 2x,
+      url('#{$pathToImage}.#{format}') 1x
+    );
+  }
+}

@@ -1,0 +1,330 @@
+@import 'variables';
+@import 'mixins';
+
+.header {
+  position: relative;
+  padding-bottom: 32px;
+
+  &__wrapper {
+    display: grid;
+    grid-template: 50px / repeat(12, 1fr);
+    align-items: center;
+    gap: $gap;
+
+    &_more {
+      margin-bottom: 23px;
+    }
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 50px;
+    background-color: $color-main-light;
+  }
+}
+
+.phone {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  max-width: fit-content;
+  align-items: center;
+  line-height: 100%;
+  color: $color-secondary;
+  transition: color $duration $timing-function;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: $color-secondary-lighten;
+    opacity: 0;
+    transition: opacity $duration $timing-function;
+  }
+
+  &__icon {
+    display: block;
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+  }
+
+  &__path {
+    fill: currentColor;
+    transition: fill $duration $timing-function;
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &:focus-visible::before {
+    opacity: 1;
+  }
+
+  &:hover:not(:focus-visible) {
+    color: $color-secondary-light;
+  }
+
+  &:active:not(:focus-visible) {
+    color: $color-secondary-dark;
+  }
+}
+
+.search {
+  position: relative;
+  grid-column: 1 / 11;
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    left: 32px;
+    width: 20px;
+    height: 20px;
+    color: $color-main;
+    transform: translateY(-50%);
+    transition: color $duration $timing-function;
+  }
+
+  &__path {
+    fill: currentColor;
+  }
+
+  &__input {
+    display: block;
+    padding: 20px 80px 17px 58px;
+    border: 2px solid $color-main-light {
+      radius: $border-radius;
+    }
+    width: 100%;
+    font: {
+      family: 'Open-Sans';
+      weight: 400;
+      size: 16px;
+    }
+    line-height: 120%;
+    color: $color-main;
+    background-color: $color-main-light;
+    transition: border-color $duration $timing-function, background-color $duration $timing-function;
+
+    &:focus-visible {
+      outline: none;
+      border-color: $color-accent;
+      background-color: $color-accent-lightest;
+    }
+
+    &:hover:not(:focus-visible) {
+      border-color: $color-main-lighten;
+      background-color: $color-main-lighten;
+    }
+
+    &:active:not(:focus-visible) {
+      border-color: $color-main-light;
+      background-color: $color-main-light;
+    }
+  }
+
+  &__input:active:not(:focus-visible) ~ &__icon {
+    color: $color-accent;
+  }
+
+  &__btn {
+    position: absolute;
+    top: 50%;
+    right: 32px;
+    transform: translateY(-50%);
+  }
+}
+
+.search__btn:focus-visible {
+  outline: none;
+}
+
+@include arrow-states('search__btn');
+
+.wrapper {
+  &_cabinet {
+    display: inline-flex;
+    grid-column: span 2;
+    justify-self: flex-end;
+    column-gap: 43px;
+  }
+}
+
+.user {
+  position: relative;
+  z-index: 0;
+  display: block;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    bottom: -4px;
+    left: -4px;
+    z-index: -1;
+    background-color: $color-accent-light;
+    opacity: 0;
+    transition: opacity $duration $timing-function;
+  }
+
+  &__icon {
+    display: block;
+    width: 26px;
+    height: 28px;
+  }
+
+  &__path {
+    fill: $color-accent;
+    transition: fill $duration $timing-function;
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &:focus-visible::before {
+    opacity: 1;
+  }
+
+  &:focus-visible &__path {
+    fill: $color-main-lightest;
+  }
+
+  &:hover:not(:focus-visible) &__path {
+    fill: $color-accent-light;
+  }
+
+  &:active:not(:focus-visible) &__path {
+    fill: $color-accent-dark;
+  }
+}
+
+.cart {
+  position: relative;
+  z-index: 0;
+  display: block;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    right: -4px;
+    bottom: -3px;
+    left: -15px;
+    z-index: -1;
+    background-color: $color-accent-light;
+    opacity: 0;
+    transition: opacity $duration $timing-function;
+  }
+
+  &__icon {
+    display: block;
+    width: 30px;
+    height: 28px;
+  }
+
+  &__path {
+    fill: $color-accent;
+    transition: fill $duration $timing-function;
+  }
+
+  &__sum {
+    position: absolute;
+    top: 5px;
+    left: -11px;
+    padding: 2px 4px 3px;
+    border-radius: 50%;
+    font: {
+      weight: 700;
+      size: 10px;
+    }
+    line-height: 100%;
+    color: $color-main-lightest;
+    background-color: $color-secondary;
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &:focus-visible::before {
+    opacity: 1;
+  }
+
+  &:focus-visible &__path {
+    fill: $color-main-lightest;
+  }
+
+  &:hover:not(:focus-visible) &__path {
+    fill: $color-accent-light;
+  }
+
+  &:active:not(:focus-visible) &__path {
+    fill: $color-accent-dark;
+  }
+}
+
+.breadcrumbs {
+  display: flex;
+  column-gap: 3px;
+  line-height: 100%;
+
+  &__item {
+    &:not(:last-child) {
+      &::after {
+        content: '/';
+      }
+    }
+  }
+
+  &__link {
+    position: relative;
+    z-index: 0;
+    display: inline-block;
+    margin-right: 3px;
+    color: $color-main;
+    transition: color $duration $timing-function;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      right: -2px;
+      bottom: -1px;
+      left: -2px;
+      z-index: -1;
+      background-color: $color-accent-lighten;
+      opacity: 0;
+      transition: opacity $duration $timing-function;
+    }
+
+    &:focus-visible {
+      outline: none;
+      color: $color-accent-dark;
+    }
+
+    &:focus-visible::before {
+      opacity: 1;
+    }
+
+    &:hover:not(:focus-visible) {
+      color: $color-accent;
+    }
+
+    &:active:not(:focus-visible) {
+      color: $color-accent-dark;
+    }
+  }
+
+  &__text {
+    color: $color-accent-dark;
+  }
+}

@@ -1,0 +1,46 @@
+@import 'variables';
+@import 'mixins';
+
+.article {
+  position: relative;
+  padding: 155px 0 150px;
+  color: $color-main-lightest;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: {
+      color: $color-main-light;
+      repeat: $bg-repeat;
+      position: $bg-position;
+      size: $bg-size;
+    }
+    @include image-set('../img/raster/collection-bg-1920', 'jpg');
+  }
+}
+
+.art {
+  max-width: 510px;
+
+  &__title {
+    margin-bottom: 47px;
+    font: {
+      weight: 400;
+      size: 48px;
+    }
+    line-height: 120%;
+  }
+
+  &__subtitle {
+    display: block;
+    font: {
+      family: 'Playfair-Display', sans-serif;
+      weight: 900;
+      size: 60px;
+    }
+    color: $color-gold;
+    line-height: 120%;
+  }
+}

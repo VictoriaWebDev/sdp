@@ -1,0 +1,937 @@
+@import 'variables';
+@import 'mixins';
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+a,
+abbr[title] {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+body {
+  min-width: 320px;
+  font: {
+    family: 'Open-Sans', sans-serif;
+    weight: 400;
+    size: 14px;
+  }
+  color: $color-main-darken;
+}
+
+::selection {
+  color: $color-main-lightest;
+  background-color: $color-accent-light;
+}
+
+.visually-hidden {
+  @include visually-hidden;
+}
+
+.title-reset,
+.text-reset {
+  margin: 0;
+}
+
+.list-reset {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.btn-reset {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.address-reset {
+  font-style: normal;
+}
+
+.fieldset-reset {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 12px;
+  width: 100%;
+  max-width: $container-max-width;
+}
+
+.address {
+  &_phone {
+    grid-column: span 2;
+  }
+}
+
+.btn {
+  display: block;
+  border: 2px solid $color-accent {
+    radius: $border-radius;
+  }
+  max-width: max-content;
+  font-size: 16px;
+  line-height: 100%;
+  text-align: center;
+
+  &_solid {
+    padding: 20px;
+    font-weight: 700;
+    color: $color-main-lightest;
+    background-color: $color-accent;
+    transition: border-color $duration $timing-function, background-color $duration $timing-function, color $duration $timing-function;
+
+    &:focus-visible {
+      outline: none;
+      border-color: $color-accent-dark;
+      background-color: $color-accent-light;
+    }
+
+    &:hover:not(:focus-visible) {
+      border-color: $color-accent-light;
+      background-color: $color-accent-light;
+    }
+
+    &:active:not(:focus-visible) {
+      border-color: $color-accent-dark;
+      background-color: $color-accent-dark;
+    }
+  }
+
+  &_ghost {
+    padding: 17px;
+    font-weight: 600;
+    color: $color-accent;
+    transition: border-color $duration $timing-function, background-color $duration $timing-function;
+
+    &:focus-visible {
+      outline: none;
+      background-color: $color-accent-light;
+      color: $color-main-lightest;
+    }
+
+    &:hover:not(:focus-visible) {
+      background-color: $color-accent;
+      color: $color-main-lightest;
+    }
+
+    &:active:not(:focus-visible) {
+      border-color: $color-accent-dark;
+      background-color: $color-accent-dark;
+    }
+  }
+
+  &_size {
+    &_sm {
+      min-width: 128px;
+    }
+
+    &_md {
+      min-width: 159px;
+    }
+
+    &_lg {
+      min-width: 187px;
+    }
+
+    &_xl {
+      padding: 17px;
+      min-width: 230px;
+      font-weight: 600;
+    }
+  }
+}
+
+.nav {
+  &_more {
+    grid-column: 4 / 13;
+    justify-self: flex-end;
+  }
+
+  &_basic {
+    grid-column: 4 / 13;
+    align-self: flex-end;
+    width: 100%;
+  }
+
+  &_submenu {
+    grid-column: 5 / 13;
+    padding-top: 4px;
+  }
+
+  &__title {
+    font: {
+      weight: 400;
+      size: 16px;
+    }
+    line-height: 100%;
+  }
+
+  &__list {
+    &_more {
+      display: flex;
+      justify-content: space-between;
+      column-gap: 64px;
+    }
+
+    &_basic {
+      display: flex;
+      justify-content: space-between;
+      column-gap: $gap;
+    }
+
+    &_footer {
+      display: grid;
+      grid-template-columns: max-content minmax(154px, max-content) minmax(141px, max-content) max-content;
+      justify-content: space-between;
+      gap: $gap;
+    }
+  }
+
+  &__item {
+    &_submenu {
+      &:not(:last-child) {
+        margin-bottom: 8px;
+      }
+    }
+  }
+
+  &__title {
+    margin-bottom: 6px;
+  }
+
+  &__link {
+    &_more {
+      position: relative;
+      z-index: 0;
+      line-height: 100%;
+      color: $color-main;
+      transition: color $duration $timing-function;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: -1px;
+        right: -10px;
+        bottom: -1px;
+        left: -10px;
+        z-index: -1;
+        background-color: $color-accent-lighten;
+        opacity: 0;
+        transition: opacity $duration $timing-function;
+      }
+
+      &:focus-visible {
+        outline: none;
+        color: $color-accent-dark;
+      }
+
+      &:focus-visible::before {
+        opacity: 1;
+      }
+
+      &:hover:not(:focus-visible) {
+        color: $color-accent;
+      }
+
+      &:active:not(:focus-visible) {
+        color: $color-accent-dark;
+      }
+    }
+
+    &_basic {
+      position: relative;
+      z-index: 0;
+      font-size: 16px;
+      line-height: 137%;
+      transition: color $duration $timing-function;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: -10px;
+        bottom: 0;
+        left: -10px;
+        z-index: -1;
+        background-color: $color-accent-lighten;
+        opacity: 0;
+        transition: opacity $duration $timing-function;
+      }
+
+      &:focus-visible {
+        outline: none;
+      }
+
+      &:focus-visible::before {
+        opacity: 1;
+      }
+
+      &:hover:not(:focus-visible) {
+        color: $color-accent;
+      }
+
+      &:active:not(:focus-visible) {
+        color: $color-accent-dark;
+      }
+    }
+  }
+}
+
+.logo {
+  display: block;
+  max-width: 187px;
+  transition: transform $duration $timing-function;
+
+  &_header {
+    grid-column: 1 / 3;
+  }
+
+  &__img {
+    width: 100%;
+    aspect-ratio: auto 187/27;
+  }
+
+  &:focus-visible {
+    outline: 1px solid $color-accent {
+      offset: 3px;
+    }
+  }
+
+  &:hover:not(:focus-visible) {
+    transform: scale(1.05);
+  }
+
+  &:active:not(:focus-visible) {
+    transform: scale(1);
+  }
+}
+
+.arrow {
+  display: block;
+
+  &__circle {
+    stroke: $color-accent;
+    transition: fill $duration $timing-function, stroke $duration $timing-function;
+  }
+
+  &__path {
+    stroke: $color-accent;
+    transition: stroke $duration $timing-function;
+  }
+
+  &_search {
+    width: 32px;
+    height: 32px;
+  }
+
+  &_card {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.section {
+  &-title {
+    margin-bottom: 26px;
+    font: {
+      weight: 400;
+      size: 32px;
+    }
+    line-height: 100%;
+  }
+}
+
+.cards {
+  &_offers {
+    display: grid;
+    grid-template-columns: 1fr 2.1fr 1fr;
+    gap: $gap;
+  }
+
+  &_rating {
+    display: grid;
+    grid: {
+      template-columns: repeat(4, 1fr);
+      auto-rows: 1fr;
+    }
+    gap: $gap;
+  }
+
+  &_categories {
+    display: grid;
+    grid: {
+      template: 511px / repeat(12, 1fr);
+      auto-rows: 405px;
+    }
+    gap: $gap;
+  }
+
+  &_useful {
+    display: grid;
+    grid: {
+      template-columns: 1fr;
+      auto-columns: 1fr;
+      auto-rows: 1fr;
+      auto-flow: column;
+    }
+    column-gap: $gap;
+    row-gap: 16px;
+  }
+
+  &_products {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $gap;
+  }
+
+  &_catalog {
+    display: grid;
+    grid: {
+      template-columns: repeat(3, 1fr);
+      column: span 9;
+      auto-rows: 1fr;
+    }
+    gap: $gap;
+  }
+
+  &__item {
+    &_offer {
+      &:nth-child(n + 4) {
+        display: none;
+      }
+    }
+
+    &_category {
+      &:nth-child(-n+2) {
+        grid-column: span 6;
+      }
+
+      &:nth-child(n+3) {
+        grid-column: span 4;
+      }
+    }
+
+    &_useful {
+      &:not(:nth-child(-n + 2)) {
+        display: none;
+      }
+    }
+  }
+}
+
+.card {
+  position: relative;
+  border-radius: $border-radius;
+  width: 100%;
+  height: 100%;
+  background-color: $color-main-light;
+
+  &_offer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 299px 30px 30px;
+  }
+
+  &_product {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 208px 30px 30px;
+  }
+
+  &_category {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 14px;
+    padding: 30px;
+    background-repeat: $bg-repeat;
+  }
+
+  &_theme {
+    &_sofas,
+    &_armchair,
+    &_beds,
+    &_dressers,
+    &_chairs {
+      background-position: left 60%;
+    }
+
+    &_sofas,
+    &_armchair {
+      background-size: auto 60.3%;
+    }
+
+    &_beds,
+    &_dressers,
+    &_chairs {
+      background-size: auto 50%;
+    }
+
+    &_sofas {
+      @include image-set('../img/raster/sofas-bg-1920', 'png');
+    }
+
+    &_armchair {
+      @include image-set('../img/raster/armchairs-bg-1920', 'png');
+    }
+
+    &_beds {
+      @include image-set('../img/raster/beds-bg-1920', 'png');
+    }
+
+    &_dressers {
+      @include image-set('../img/raster/dressers-bg-1920', 'png');
+    }
+
+    &_chairs {
+      @include image-set('../img/raster/chairs-bg-1920', 'png');
+    }
+  }
+
+  &_useful {
+    display: flex;
+    flex-direction: column;
+
+    &::before {
+      content: '';
+      display: block;
+      flex-shrink: 0;
+      width: 100%;
+      height: 426px;
+      border-radius: $border-radius $border-radius 0 0;
+      background: {
+        position: $bg-position;
+        repeat: $bg-repeat;
+        size: $bg-size;
+      }
+    }
+  }
+
+  &_view {
+    &_bg-1 {
+      &::before {
+        @include image-set('../img/raster/useful-bg-1-1920', 'jpg');
+      }
+    }
+
+    &_bg-2 {
+      &::before {
+        @include image-set('../img/raster/useful-bg-2-1920', 'jpg');
+      }
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex: {
+      direction: column;
+      basis: 100%;
+    }
+    align-items: flex-start;
+    justify-content: space-between;
+    row-gap: 36px;
+    padding: 31px 30px 30px;
+  }
+
+  &__desc {
+    font-size: 24px;
+    line-height: 138%;
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    column-gap: 31px;
+  }
+
+  &__label {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    padding: 9px 15px 9px 6px;
+    min-width: 92px;
+    font: {
+      weight: 700;
+    }
+    color: $color-main-lightest;
+    text-align: center;
+    background-color: $color-secondary;
+    clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%);
+  }
+
+  &__rating {
+    position: absolute;
+    top: 32px;
+    left: 30px;
+  }
+
+  &__picture {
+    position: absolute;
+
+    &_basic {
+      display: flex;
+      align: {
+        items: flex-end;
+        self: center;
+      }
+      max-width: 85%;
+    }
+
+    &_scheme {
+      right: 30px;
+      bottom: 30px;
+    }
+
+    &_size {
+      &_md {
+        top: 64px;
+        height: 218px;
+      }
+
+      &_lg {
+        top: 37px;
+        height: 245px;
+      }
+    }
+
+    &_theme {
+      &_product {
+        top: 41px;
+        max-width: 90%;
+        height: 150px;
+      }
+    }
+
+    &_model {
+      &_z-85 {
+        padding-bottom: 39px;
+      }
+    }
+  }
+
+  &__img {
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  &__title {
+    margin-bottom: 21px;
+    font: {
+      weight: 400;
+      size: 24px;
+    }
+    line-height: 130%;
+
+    &_category {
+      margin-bottom: 0;
+    }
+  }
+
+  &__subtitle {
+    display: block;
+  }
+
+  &__wrapper {
+    margin-bottom: 22px;
+  }
+
+  &__price {
+    font-size: 16px;
+    line-height: 130%;
+    color: $color-main-dark;
+
+    &_current {
+      margin-right: 26px;
+      font-size: 18px;
+      color: $color-secondary;
+    }
+
+    &_previous {
+      position: relative;
+      font-size: 16px;
+      color: $color-main;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 13px;
+        right: 0;
+        width: 100%;
+        height: 1px;
+        background-color: $color-main;
+      }
+    }
+
+    &_product {
+      margin-bottom: 24px;
+    }
+  }
+
+  &__btn {
+    margin-top: auto;
+  }
+
+  &__link {
+    &_subcategory {
+      position: relative;
+      z-index: 0;
+      line-height: 100%;
+      color: $color-main;
+      transition: color $duration $timing-function;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: -1px;
+        right: -10px;
+        bottom: -1px;
+        left: -10px;
+        z-index: -1;
+        background-color: $color-accent-lighten;
+        opacity: 0;
+        transition: opacity $duration $timing-function;
+      }
+
+      &:focus-visible {
+        outline: none;
+        color: $color-accent-dark;
+      }
+
+      &:focus-visible::before {
+        opacity: 1;
+      }
+
+      &:hover:not(:focus-visible) {
+        color: $color-accent;
+      }
+
+      &:active:not(:focus-visible) {
+        color: $color-accent-dark;
+      }
+    }
+  }
+}
+
+.rating {
+  font-size: 16px;
+  line-height: 130%;
+  color: $color-secondary;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    margin-right: 3px;
+    width: 16px;
+    height: 15px;
+    background: url('../img/vector/star.svg') $bg-repeat $bg-position / contain;
+  }
+}
+
+.link-catalog {
+  display: flex;
+  align-items: center;
+  column-gap: 6px;
+  font: {
+    weight: 700;
+    size: 16px;
+  }
+  line-height: 120%;
+  color: $color-accent;
+  transition: color $duration $timing-function;
+
+  &__text {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: currentColor;
+      opacity: 0;
+      transition: opacity $duration $timing-function;
+    }
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &:focus-visible &__text::before {
+    opacity: 1;
+  }
+
+  &:hover:not(:focus-visible) &__text::before {
+    opacity: 1;
+  }
+
+  &:active:not(:focus-visible) {
+    color: $color-accent-dark;
+  }
+
+  &:active:not(:focus-visible) &__text::before {
+    opacity: 1;
+  }
+}
+
+@include arrow-states('link-catalog');
+
+.custom-checkbox {
+  display: block;
+  max-width: max-content;
+  user-select: none;
+  cursor: pointer;
+
+  &:not(:last-child) {
+    margin-bottom: 11px;
+  }
+
+  &__input {
+    position: absolute;
+    appearance: none;
+  }
+
+  &__text {
+    position: relative;
+    padding-left: 32px;
+    font-size: 16px;
+    line-height: 130%;
+    color: $color-main-dark;
+    transition: color $duration $timing-function;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      border: 1px solid $color-main {
+        radius: 2px;
+      }
+      width: 20px;
+      height: 20px;
+      transform: translateY(-50%);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      border-radius: 2px;
+      width: 20px;
+      height: 20px;
+      background: $color-accent url('../img/vector/check.svg') $bg-repeat 67% 59% / 70%;
+      transform: translateY(-50%);
+      opacity: 0;
+      transition: opacity $duration $timing-function;
+    }
+
+    &_sm {
+      padding-left: 22px;
+      font-size: 14px;
+      line-height: 100%;
+      color: $color-main-darken;
+
+      &::before {
+        width: 14px;
+        height: 14px;
+      }
+
+      &::after {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+
+  &__link {
+    position: relative;
+    z-index: 0;
+    color: $color-accent;
+    text: {
+      transform: lowercase;
+      decoration: underline;
+    }
+    transition: color $duration $timing-function;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      right: -2px;
+      bottom: -1px;
+      left: -2px;
+      z-index: -1;
+      background-color: $color-accent-lighten;
+      opacity: 0;
+      transition: opacity $duration $timing-function;
+    }
+  }
+
+  &__input:checked + &__text::after {
+    opacity: 1;
+  }
+
+  &__input:focus-visible + &__text {
+    outline: 1px solid $color-accent {
+      offset: 3px;
+    }
+  }
+
+  &__link:focus-visible {
+    outline: none;
+    color: $color-accent-dark;
+  }
+
+  &__link:focus-visible::before {
+    opacity: 1;
+  }
+
+  &__input:hover:not(:focus-visible) + &__text {
+    color: $color-accent;
+  }
+
+  &__link:hover:not(:focus-visible) {
+    color: $color-accent-dark;
+  }
+
+  &__input:active:not(:focus-visible) + &__text {
+    color: $color-accent-dark;
+  }
+
+  &__link:active:not(:focus-visible) {
+    color: $color-accent-light;
+  }
+}
